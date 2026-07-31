@@ -334,7 +334,7 @@ describe("OpenClaw performance workflow", () => {
     );
     expect(workflowText).not.toContain("CLAWGRIT_REPORTS_TOKEN");
     expect(workflowText).not.toContain("secrets.GH_APP_PRIVATE_KEY");
-    expect(workflowText).not.toContain('app-id: "2729701"');
+    expect(workflowText).not.toContain('client-id: "2729701"');
   });
 
   it("keeps manual non-release publication advisory", () => {

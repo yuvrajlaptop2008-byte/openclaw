@@ -142,7 +142,7 @@ describe("dependency guard workflow", () => {
       "actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3",
     );
     expect(primaryTokenStep.with).toMatchObject({
-      "app-id": "2729701",
+      "client-id": "2729701",
       owner: "${{ needs.dependency-guard-detect.outputs.autoscrub-owner }}",
       repositories: "${{ needs.dependency-guard-detect.outputs.autoscrub-repository }}",
       "permission-contents": "write",
@@ -152,7 +152,7 @@ describe("dependency guard workflow", () => {
       "actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3",
     );
     expect(fallbackTokenStep.with).toMatchObject({
-      "app-id": "2971289",
+      "client-id": "2971289",
       owner: "${{ needs.dependency-guard-detect.outputs.autoscrub-owner }}",
       repositories: "${{ needs.dependency-guard-detect.outputs.autoscrub-repository }}",
       "permission-contents": "write",
