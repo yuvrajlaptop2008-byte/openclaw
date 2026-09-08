@@ -1,0 +1,31 @@
+{
+  "id": "viral-clipper",
+  "activation": {
+    "onStartup": true
+  },
+  "name": "Viral Clipper",
+  "description": "Autopilot viral clipper Agent Plugin bundle for short-form video generation (caption-to-short) and long-video highlight clipping.",
+  "catalog": { "featured": true, "order": 50 },
+  "contracts": {
+    "tools": ["viral_clipper"]
+  },
+  "skills": ["./skills"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "outputDir": {
+        "type": "string",
+        "description": "Directory for local render outputs and post packages."
+      },
+      "fontName": {
+        "type": "string",
+        "description": "Optional default font name for ASS subtitle formatting."
+      },
+      "defaultLanguage": {
+        "type": "string",
+        "default": "en"
+      }
+    }
+  }
+}
