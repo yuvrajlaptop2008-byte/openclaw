@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { ViralClipperInput, ViralClipperOutput } from "./types.js";
+import type { ViralClipperInput, ViralClipperOutput } from "./types.js";
 import { checkCapabilities } from "./preflight.js";
 import { processCaptionToShort } from "./routes/caption-to-short.js";
 import { processLongVideoClipping } from "./routes/long-video-clipper.js";

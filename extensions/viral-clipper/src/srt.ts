@@ -1,4 +1,4 @@
-import { SrtEntry } from "./types.js";
+import type { SrtEntry } from "./types.js";
 import { parseTimestampToSeconds, formatSecondsToSrtTimestamp } from "./timestamps.js";
 
 export function parseSrt(srtContent: string): SrtEntry[] {
@@ -65,12 +65,10 @@ export function cropSrtEntries(
   let indexCounter = 1;
 
   for (const entry of entries) {
-    // Skip if entry finishes before crop start or begins after crop end
     if (entry.endTime <= cropStart || entry.startTime >= cropEnd) {
       continue;
     }
 
-    // Clamp entry start and end times to crop bounds and shift relative to cropStart
     const clampedStart = Math.max(cropStart, entry.startTime);
     const clampedEnd = Math.min(cropEnd, entry.endTime);
 
@@ -97,7 +95,6 @@ export function generateSrtFromScript(
   const text = scriptText.trim();
   if (!text) return [];
 
-  // Split into sentences / phrase chunks
   const chunks = text
     .split(/(?<=[.!?])\s+|\n+/)
     .map((c) => c.trim())

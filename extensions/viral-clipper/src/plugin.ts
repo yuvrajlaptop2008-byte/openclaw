@@ -3,7 +3,7 @@ import { resolveLivePluginConfigObject } from "openclaw/plugin-sdk/plugin-config
 import type { OpenClawConfig, OpenClawPluginApi } from "./api.js";
 import { resolveViralClipperPluginConfig } from "./config.js";
 import { executeViralClipper } from "./clipper-engine.js";
-import { ViralClipperInput } from "./types.js";
+import type { ViralClipperInput } from "./types.js";
 
 const HighlightClipSchema = Type.Object({
   id: Type.Optional(Type.String({ description: "Optional clip identifier." })),

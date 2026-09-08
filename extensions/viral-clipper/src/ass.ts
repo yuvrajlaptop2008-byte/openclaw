@@ -1,4 +1,4 @@
-import { SrtEntry } from "./types.js";
+import type { SrtEntry } from "./types.js";
 import { formatSecondsToAssTimestamp } from "./timestamps.js";
 
 export interface AssStyleOptions {

@@ -1,4 +1,4 @@
-import { SocialPostCopy } from "./types.js";
+import type { SocialPostCopy } from "./types.js";
 
 export function generateSocialPostPackages(
   title: string,

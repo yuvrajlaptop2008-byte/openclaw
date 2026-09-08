@@ -1,6 +1,6 @@
 import { execFile } from "child_process";
 import { promisify } from "util";
-import { PreflightCapabilities } from "./types.js";
+import type { PreflightCapabilities } from "./types.js";
 
 const execFileAsync = promisify(execFile);
 

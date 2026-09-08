@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import {
+import type {
   HighlightClipSpec,
   LongVideoClipInput,
   PreflightCapabilities,
@@ -21,12 +21,10 @@ export async function processLongVideoClipping(
 ): Promise<ViralClipperOutput> {
   const warnings: string[] = [];
 
-  // Validate source video path
   if (!input.videoPath) {
     throw new Error("Long-video clipping route requires videoPath.");
   }
 
-  // Parse SRT if provided
   let fullSrtEntries: SrtEntry[] = [];
   if (input.srtContent) {
     fullSrtEntries = parseSrt(input.srtContent);
@@ -39,10 +37,8 @@ export async function processLongVideoClipping(
     }
   }
 
-  // Define highlight clip specs
   let clips: HighlightClipSpec[] = input.clips || [];
   if (clips.length === 0) {
-    // Default highlight clip: first 30 seconds
     clips = [
       {
         id: "clip_1",
@@ -70,7 +66,6 @@ export async function processLongVideoClipping(
     let clipSrtPath: string | undefined;
     let clipAssPath: string | undefined;
 
-    // Crop SRT entries if full SRT is available
     if (fullSrtEntries.length > 0) {
       const croppedEntries = cropSrtEntries(fullSrtEntries, startSec, endSec);
       if (croppedEntries.length > 0) {

@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import {
+import type {
   CaptionToShortInput,
   PreflightCapabilities,
   RenderedClipResult,
@@ -26,17 +26,14 @@ export async function processCaptionToShort(
     throw new Error("Caption-to-short route requires non-empty scriptText.");
   }
 
-  // Estimate duration based on text length (~15 chars per sec, min 5s)
   const estimatedDurationSeconds = Math.max(5, Math.ceil(scriptText.length / 15));
 
-  // 1. Generate SRT entries
   const srtEntries = generateSrtFromScript(scriptText, estimatedDurationSeconds);
   const srtContent = stringifySrt(srtEntries);
 
   const srtPath = path.join(workDir, `${filenameBase}.srt`);
   await fs.writeFile(srtPath, srtContent, "utf-8");
 
-  // 2. Generate ASS subtitles
   const assContent = generateAssSubtitles(srtEntries, {
     fontName: input.fontName || "Arial",
     fontSize: 52,
@@ -47,7 +44,6 @@ export async function processCaptionToShort(
 
   const videoOutputPath = path.join(workDir, `${filenameBase}.mp4`);
 
-  // 3. Render video if FFmpeg is available
   if (capabilities.hasFfmpeg) {
     await renderClipWithFfmpeg({
       inputAudioPath: input.audioPath,
@@ -61,7 +57,6 @@ export async function processCaptionToShort(
     warnings.push(
       "FFmpeg binary not found in PATH. Created SRT, ASS, and social post package assets; skipped real MP4 video compilation."
     );
-    // Write placeholder file if FFmpeg absent
     await fs.writeFile(
       videoOutputPath,
       `[Placeholder for ${filenameBase}.mp4 - FFmpeg required for video render]`,
@@ -69,7 +64,6 @@ export async function processCaptionToShort(
     );
   }
 
-  // 4. Generate social post copy packages
   const socialPackages = generateSocialPostPackages(title, scriptText, language);
 
   const renderedClip: RenderedClipResult = {
